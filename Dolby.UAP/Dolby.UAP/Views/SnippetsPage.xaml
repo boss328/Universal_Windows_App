@@ -1,0 +1,51 @@
+﻿<base:BasePage
+    x:Name="pageRoot"
+    x:Class="Dolby.UAP.Views.SnippetsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dolby.UAP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:base="using:Dolby.UAP.Base"
+    mc:Ignorable="d">
+
+    <base:BasePage.DataContext>
+        <Binding Path="SnippetsViewModel" Source="{StaticResource Locator}"/>
+    </base:BasePage.DataContext>
+
+    <Grid Name="SnippetsRoot" Background="#FF1C2939">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Background="#FF131C27">
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0">
+                <TextBlock FontSize="24" Margin="0,2" HorizontalAlignment="Right" Foreground="#7a7a7a" Text="1"/>
+                <TextBlock FontSize="24" Margin="0,2" HorizontalAlignment="Right" Foreground="#7a7a7a" Text="2"/>
+                <TextBlock FontSize="24" Margin="0,2" HorizontalAlignment="Right" Foreground="#7a7a7a" Text="3"/>
+                <TextBlock FontSize="24" Margin="0,2" HorizontalAlignment="Right" Foreground="#7a7a7a" Text="4"/>
+                <TextBlock FontSize="24" Margin="0,2" HorizontalAlignment="Right" Foreground="#7a7a7a" Text="5"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="24" TextWrapping="Wrap" Margin="0,2" Foreground="#FF717F8C" Text="// Setting video source via binding from view (XAML)"/>
+            <TextBlock FontSize="24" TextWrapping="Wrap" Margin="0,2">
+                <Run Text="&lt;MediaElement " />
+                <Run Foreground="#FF92CAF4" Text=" Source"/>
+                <Run Text="=&quot;{" Foreground="Gray" />
+                <Run Text=" Binding " Foreground="#FFBBA08C" />
+                <Run Text="VideoSource" Foreground="#FFD7BA7D" />
+                <Run Text=" }&quot; " Foreground="Gray" />
+                <Run Text="/&gt;" />
+            </TextBlock>
+            <TextBlock FontSize="24" TextWrapping="Wrap" Margin="0,2" Foreground="#FF717F8C" Text=""/>
+            <TextBlock FontSize="24" TextWrapping="Wrap" Margin="0,2" Foreground="#FF717F8C" Text="// Setting video source from code"/>
+            <TextBlock FontSize="24" TextWrapping="Wrap" Margin="0,2">
+                <Run Text="MediaElement.Source = "/>
+                <Run Foreground="#FF569CD6" Text="new "/>
+                <Run Text="Uri" Foreground="#FF4EC9B0"/>
+                <Run Text="(VideoSource);"/>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</base:BasePage>

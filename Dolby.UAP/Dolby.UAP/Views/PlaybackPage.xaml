@@ -1,0 +1,190 @@
+﻿<base:BasePage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dolby.UAP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:base="using:Dolby.UAP.Base"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Dolby.UAP.Controls"
+    x:Class="Dolby.UAP.Views.PlaybackPage"
+    mc:Ignorable="d">
+
+    <base:BasePage.Resources>
+        <DataTemplate x:Key="MovieTemplate">
+            <Button Padding="0" Style="{StaticResource MovieButtonStyle}" BorderThickness="0" Command="{Binding PlaybackViewModel.MovieChangedCommand, Source={StaticResource Locator}}" CommandParameter="{Binding Index}"
+                Width="{Binding PlaybackViewModel.WindowWidth, ConverterParameter=4, Converter={StaticResource ParentWidthToChildWidthConverter}, Source={StaticResource Locator}}"
+        		Height="{Binding PlaybackViewModel.WindowWidth, ConverterParameter=4, Converter={StaticResource ParentWidthToChildHeigthConverter}, Source={StaticResource Locator}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="75"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding ThumbnailFileAddress, Converter={StaticResource DebugConverter}}" Stretch="UniformToFill"/>
+                    <Grid Visibility="{Binding IsSelected, Converter={StaticResource BoolToReverseVisibilityConverter}}" Background="#CC000000"/>
+                    <Grid Grid.Row="1" Background="{Binding Index, Converter={StaticResource IndexToTitleBackgroundConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontWeight="Thin" TextTrimming="CharacterEllipsis"/>
+                    </Grid>
+                    <Grid Grid.Row="2" Background="{Binding Index, Converter={StaticResource IndexToDescriptionBackgroundConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Text="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#174658" TextWrapping="WrapWholeWords" FontSize="13"/>
+                    </Grid>
+                    <Grid Grid.RowSpan="2" Width="100" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Ellipse Margin="25" Fill="#A5000000" />
+                        <TextBlock Text="{Binding Source={StaticResource Locator}, Path=PlaybackViewModel.Position, Converter={StaticResource PositionToStringConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium"></TextBlock>
+                        <Viewbox Stretch="Uniform">
+                            <controls:ProgressCircle Width="300" Height="300" Fill="{StaticResource BrandingLightBackground}" FillBackground="#A5000000" 
+                                                     Value="{Binding Source={StaticResource Locator}, Path=PlaybackViewModel.ProgressPercentage}" />
+                        </Viewbox>
+                    </Grid>
+                </Grid>
+            </Button>
+        </DataTemplate>
+        <Style x:Key="MovieButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandingLightBlue}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrandingDarkerBlue}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Name="CarouselDisplayingStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MoviesListView">
+                <EasingDoubleKeyFrame KeyTime="0" Value="{Binding Opacity, ElementName=MoviesListView}"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.99"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="KeepCarouselStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MoviesListView">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.99"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="KeepOverCarouselStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MoviesListView">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </base:BasePage.Resources>
+
+    <base:BasePage.DataContext>
+        <Binding Path="PlaybackViewModel" Source="{StaticResource Locator}"/>
+    </base:BasePage.DataContext>
+
+    <Grid x:Name="PlaybackRootGrid" PointerMoved="PlaybackRootGrid_PointerMoved">
+        <Interactivity:Interaction.Behaviors>
+            <Core:EventTriggerBehavior EventName="SizeChanged">
+                <Core:InvokeCommandAction Command="{Binding UpdateWindowSizeCommand}"/>
+            </Core:EventTriggerBehavior>
+        </Interactivity:Interaction.Behaviors>
+        <MediaElement Name="MediaPlayer" Stretch="Uniform" MediaEnded="MediaPlayer_MediaEnded" Position="{Binding Position, Mode=TwoWay}" AreTransportControlsEnabled="True" Source="{Binding SelectedMovie.VideoSource}">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="MediaOpened">
+                    <Core:InvokeCommandAction Command="{Binding MovieStartedCommand}" CommandParameter="{Binding ElementName=MediaPlayer}"/>
+                </Core:EventTriggerBehavior>
+                <Core:EventTriggerBehavior EventName="MediaEnded">
+                    <Core:InvokeCommandAction Command="{Binding MovieEndedCommand}"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <MediaElement.TransportControls>
+                <MediaTransportControls IsFullWindowButtonVisible="False" IsFullWindowEnabled="False" IsFastForwardButtonVisible="True" IsFastForwardEnabled="True" IsFastRewindButtonVisible="True" IsFastRewindEnabled="True" IsCompact="True" IsZoomButtonVisible="False" IsZoomEnabled="False"/>
+            </MediaElement.TransportControls>
+        </MediaElement>
+        <ListView x:Name="MoviesListView" Opacity="{Binding ListViewOpacity, Mode=TwoWay}" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemTemplate="{StaticResource MovieTemplate}" ItemsSource="{Binding MoviesList}"
+			ScrollViewer.HorizontalScrollBarVisibility="Auto"
+			ScrollViewer.VerticalScrollBarVisibility="Disabled"
+			ScrollViewer.HorizontalScrollMode="Enabled"
+			ScrollViewer.VerticalScrollMode="Disabled"
+			ScrollViewer.ZoomMode="Disabled"
+			SelectionMode="None"
+			Width="{Binding Width, ElementName=PlaybackRootGrid}" PointerMoved="MoviesListView_PointerMoved" PointerEntered="MoviesListView_PointerEntered" PointerExited="MoviesListView_PointerExited">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Padding" Value="0" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ItemsPresenter Width="{Binding Width, ElementName=PlaybackRootGrid}"/>
+        </ListView>
+    </Grid>
+</base:BasePage>

@@ -1,0 +1,56 @@
+﻿<base:BasePage
+    x:Name="pageRoot"
+    x:Class="Dolby.UAP.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dolby.UAP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:base="using:Dolby.UAP.Base"
+    mc:Ignorable="d">
+
+    <base:BasePage.Resources>
+        <!-- TODO: If needed -->
+    </base:BasePage.Resources>
+
+    <base:BasePage.DataContext>
+        <Binding Path="AboutViewModel" Source="{StaticResource Locator}"/>
+    </base:BasePage.DataContext>
+
+    <Grid Name="AboutRoot" Background="{StaticResource BrandingDarkBlue}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="TextContainer" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="32" TextAlignment="Center">
+                        <Run FontWeight="Thin" Text="Dolby Audio™ quality can be delivered through the"></Run>
+                        <Run FontWeight="Medium" Text=" Universal Windows App "></Run>
+                        <Run FontWeight="Thin" Text="on PCs and tablets. Give your users a crisp, clear, and detailed sound experience with"></Run>
+                        <Run FontWeight="Medium" Text=" Dolby Audio - Dolby Digital Plus™"></Run>
+            </TextBlock>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="18.667" TextAlignment="Center" FontWeight="Thin" VerticalAlignment="Center" Margin="0,150,0,0">
+                        <Run FontWeight="Light" Text="Experience created by"></Run>
+                        <Run FontWeight="Medium" Text=" Plain Concepts "></Run>
+                        <Run FontWeight="Light" Text="powered by"></Run>
+                        <Run FontWeight="Medium" Text=" Dolby Audio"></Run>
+            </TextBlock>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="32" TextAlignment="Center" FontWeight="Thin" VerticalAlignment="Center">
+                        <Run Text="Learn how to build your content in Dolby Digital Plus. Visit us at "></Run>
+                        <Run Text="http://developer.dolby.com" Foreground="#FF54E8F5"></Run>
+            </TextBlock>
+            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="14" TextAlignment="Center" FontWeight="Thin" Text="Dolby and the double-D symbol are registered trademarks of Dolby Laboratories. All other trademarks remain the property of their respective owners. © 2015 Dolby Laboratories, Inc. All rights reserved." VerticalAlignment="Bottom" />
+        </Grid>
+    </Grid>
+</base:BasePage>

@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="Dolby.UAP.Controls.ProgressCircle"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dolby.UAP.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="100"
+    d:DesignWidth="100" SizeChanged="ProgressCircle_SizeChanged">
+    <UserControl.Resources>
+        <Storyboard
+            x:Key="ringSb">
+            <DoubleAnimation
+                x:Name="angleAnimation"
+                EnableDependentAnimation="true"
+                Duration="0:0:2"
+                Storyboard.TargetName="Ring"
+                Storyboard.TargetProperty="EndAngle">
+                
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <local:RingSlice
+            x:Name="BgFill"
+            Fill="#51000000"
+            Stroke="Transparent"
+            StrokeThickness="0"
+            InnerRadius="90"
+            Radius="100"
+            StartAngle="0"
+            EndAngle="359.9999"/>
+        <local:RingSlice
+            x:Name="Ring"
+            Fill="#FFFFB637"
+            Stroke="#FFFFB637"
+            StrokeThickness="0"
+            InnerRadius="90"
+            Radius="100"
+            StartAngle="0"
+            EndAngle="0"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="0" FontFamily="Segoe UI Light" FontSize="42" Name="lblValue" Visibility="Collapsed"/>
+            <!--<TextBlock Text="%" FontFamily="Segoe UI Light" FontSize="42" Name="lblPercent" />-->
+        </StackPanel>
+    </Grid>
+</UserControl>
