@@ -58,22 +58,7 @@
         // Using a DependencyProperty as the backing store for BgBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillBackgroundProperty =
             DependencyProperty.Register("FillBackgroundBrush", typeof(Brush), typeof(ProgressCircle), null);
-
-
-        public double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set
-            {
-                //lblValue.FontSize = value;
-                SetValue(FontSizeProperty, value);
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for FontSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.Register("FontSize", typeof(double), typeof(ProgressCircle), new PropertyMetadata(42));
-
+       
         public bool Animate
         {
             get { return (bool)GetValue(AnimateProperty); }
