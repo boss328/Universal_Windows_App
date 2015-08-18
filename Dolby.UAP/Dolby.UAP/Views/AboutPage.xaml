@@ -10,7 +10,10 @@
     mc:Ignorable="d">
 
     <base:BasePage.Resources>
-        <!-- TODO: If needed -->
+         <x:Double x:Key="FontSizeMoreSmall">14</x:Double>
+        <x:Double x:Key="FontSizeSmall">18</x:Double>
+        <x:Double x:Key="FontSizeMedium">23</x:Double>
+        <x:Double x:Key="FontSizeLarge">32</x:Double>
     </base:BasePage.Resources>
 
     <base:BasePage.DataContext>
@@ -18,39 +21,86 @@
     </base:BasePage.DataContext>
 
     <Grid Name="AboutRoot" Background="{StaticResource BrandingDarkBlue}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowWidthStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FirstParagraph.FontSize" Value="{StaticResource FontSizeLarge}" />
+                        <Setter Target="SecondParagraph.FontSize" Value="{StaticResource FontSizeSmall}" />
+                        <Setter Target="ThirdParagraph.FontSize" Value="{StaticResource FontSizeLarge}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FirstParagraph.FontSize" Value="{StaticResource FontSizeMedium}" />
+                        <Setter Target="SecondParagraph.FontSize" Value="{StaticResource FontSizeMoreSmall}" />
+                        <Setter Target="ThirdParagraph.FontSize" Value="{StaticResource FontSizeMedium}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="WindowHeightStates">
+                <VisualState x:Name="HighState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="700" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SecondParagraph.Visibility" Value="Visible" />
+                        <Setter Target="ThirdParagraph.Visibility" Value="Visible" />
+                        <Setter Target="ForthParagraph.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SecondParagraph.Visibility" Value="Collapsed" />
+                        <Setter Target="ThirdParagraph.Visibility" Value="Collapsed" />
+                        <Setter Target="ForthParagraph.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
-        <Grid Name="TextContainer" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="32" TextAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="TextContainer" Grid.Column="1" Grid.Row="1">
+            <TextBlock Name="FirstParagraph" TextWrapping="WrapWholeWords" FontSize="32" TextAlignment="Center">
                         <Run FontWeight="Thin" Text="Dolby Audio™ quality can be delivered through the"></Run>
                         <Run FontWeight="Medium" Text=" Universal Windows App "></Run>
                         <Run FontWeight="Thin" Text="on PCs and tablets. Give your users a crisp, clear, and detailed sound experience with"></Run>
                         <Run FontWeight="Medium" Text=" Dolby Audio - Dolby Digital Plus™"></Run>
             </TextBlock>
-            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="18.667" TextAlignment="Center" FontWeight="Thin" VerticalAlignment="Center" Margin="0,150,0,0">
+            <TextBlock Name="SecondParagraph" TextWrapping="WrapWholeWords" FontSize="18.667" TextAlignment="Center" FontWeight="Thin" VerticalAlignment="Center" Margin="0,150,0,0">
                         <Run FontWeight="Light" Text="Experience created by"></Run>
                         <Run FontWeight="Medium" Text=" Plain Concepts "></Run>
                         <Run FontWeight="Light" Text="powered by"></Run>
                         <Run FontWeight="Medium" Text=" Dolby Audio"></Run>
             </TextBlock>
-            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="32" TextAlignment="Center" FontWeight="Thin" VerticalAlignment="Center">
+            <TextBlock Name="ThirdParagraph" TextWrapping="WrapWholeWords" FontSize="32" TextAlignment="Center" FontWeight="Thin" VerticalAlignment="Center">
                         <Run Text="Learn how to build your content in Dolby Digital Plus. Visit us at "></Run>
                         <Run Text="http://developer.dolby.com" Foreground="#FF54E8F5"></Run>
             </TextBlock>
-            <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords" FontSize="14" TextAlignment="Center" FontWeight="Thin" Text="Dolby and the double-D symbol are registered trademarks of Dolby Laboratories. All other trademarks remain the property of their respective owners. © 2015 Dolby Laboratories, Inc. All rights reserved." VerticalAlignment="Bottom" />
+            <TextBlock Name="ForthParagraph" TextWrapping="WrapWholeWords" FontSize="14" TextAlignment="Center" FontWeight="Thin" Text="Dolby and the double-D symbol are registered trademarks of Dolby Laboratories. All other trademarks remain the property of their respective owners. © 2015 Dolby Laboratories, Inc. All rights reserved." VerticalAlignment="Bottom" />
         </Grid>
     </Grid>
 </base:BasePage>

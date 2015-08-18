@@ -1,22 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="1fee36f2-1077-469a-9c54-339151bc77a7" Publisher="CN=Gk_8" Version="1.0.5.5" />
-  <mp:PhoneIdentity PhoneProductId="1fee36f2-1077-469a-9c54-339151bc77a7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="4faa10e6-c69f-48c6-a85c-af16a15a6217" Publisher="CN=lfernandez" Version="1.0.1.0" />
+  <mp:PhoneIdentity PhoneProductId="4faa10e6-c69f-48c6-a85c-af16a15a6217" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Dolby Audio Universal App Experience</DisplayName>
-    <PublisherDisplayName>Gk_8</PublisherDisplayName>
+    <DisplayName>Dolby.UAP</DisplayName>
+    <PublisherDisplayName>lfernandez</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Dolby.UAP.App">
-      <uap:VisualElements DisplayName="Dolby Audio Universal App Experience" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Dolby Audio Universal App Experience" BackgroundColor="#1b485b">
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      <uap:VisualElements DisplayName="Dolby Audio Universal App Experience" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Dolby.UAP" BackgroundColor="#1b485b">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#1b485b" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape" />
+        </uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

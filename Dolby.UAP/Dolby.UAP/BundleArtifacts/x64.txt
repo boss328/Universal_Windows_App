@@ -1,0 +1,2 @@
+MainPackage=C:\TFS\LFB\Migration_v3\Dolby.UAP\Dolby.UAP\bin\x64\Debug\Dolby.UAP_1.0.1.0_x64_Debug.appx
+ResourcePack=C:\TFS\LFB\Migration_v3\Dolby.UAP\Dolby.UAP\bin\x64\Debug\Dolby.UAP_1.0.1.0_scale-100.appx

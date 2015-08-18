@@ -3,25 +3,25 @@
         "Title": "Dolby Atmos – AVC (H.264)",
         "Description": "Living room sample with Dolby Atmos & H.264 encoded video",
         "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot1.png",
-        "OtherVideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyAtmos.mp4"
+        "VideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyAtmos.mp4"
     },
     {
         "Title": "Dolby Digital Plus 5.1 – AVC (H.264)",
         "Description": "Living room sample with Dolby Digital Plus 5.1  & H.264 encoded video",
         "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot2.png",
-        "DolbyVideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyDigitalPlus_51.mp4"
+        "VideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyDigitalPlus_51.mp4"
     },
     {
         "Title": "Dolby Digital Plus 7.1 – AVC (H.264)",
         "Description": "Living room sample with Dolby Digital Plus 7.1 & H.264 encoded video",
         "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot3.png",
-        "DolbyVideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyDigitalPlus_71.mp4"
+        "VideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyDigitalPlus_71.mp4"
     },
 
     {
         "Title": "Dolby Digital Plus 5.1 – HEVC (H.265)",
         "Description": "Living room sample with Dolby Digital Plus 5.1 & H.265 encoded video",
         "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot4.png",
-        "DolbyVideoSource": "ms-appx:///Assets/Content/Videos/H265_DolbyDigitalPlus_51.mp4"
+        "VideoSource": "ms-appx:///Assets/Content/Videos/H265_DolbyDigitalPlus_51.mp4"
     }
 ]

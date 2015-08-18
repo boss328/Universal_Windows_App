@@ -2,6 +2,7 @@
 {
     using Dolby.UAP.Base;
     using Dolby.UAP.ViewModels;
+    using System.Diagnostics;
     using Windows.UI.Xaml.Controls;
 
     public sealed partial class PlaybackPage : BasePage
@@ -39,14 +40,14 @@
             _carouselAnimationIsActive = false;
         }
 
-        private void MoviesListView_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        private void VideosGrid_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             KeepCarouselStoryboard.Begin();
         }
 
-        private void MoviesListView_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        {
-            if ((sender as ListView).Opacity > 0.0)
+        private void VideosGrid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {            
+            if ((sender as Grid).Opacity > 0.0)
             {
                 KeepOverCarouselStoryboard.Begin();
                 KeepCarouselStoryboard.Stop();
@@ -63,7 +64,7 @@
             }
         }
 
-        private void MoviesListView_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        private void VideosGrid_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             _carouselAnimationIsActive = true;
             KeepCarouselStoryboard.Begin();
@@ -76,6 +77,18 @@
                 _carouselAnimationIsActive = true;
                 CarouselDisplayingStoryboard.Begin();
             }
+            if (vm != null)
+            {
+                vm.VideoEnded();
+            }
+        }
+
+        private void MediaPlayer_MediaOpened(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (vm != null)
+            {
+                vm.VideoStarted(MediaPlayer);
+            }            
         }
     }
 }

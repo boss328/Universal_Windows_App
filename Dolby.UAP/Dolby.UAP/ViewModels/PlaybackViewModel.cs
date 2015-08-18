@@ -22,60 +22,37 @@
             _dataProvider = dataProvider;
             _savedPosition = null;
 
-            _movieChangedCommand = new DelegateCommand<int>(MovieChangedCommandExecute);
-            _movieStartedCommand = new DelegateCommand<MediaElement>(MovieStartedCommandExecute);
-            _movieEndedCommand = new DelegateCommand(MovieEndedCommandExecute);
-            _updateWindowSizeCommand = new DelegateCommand<SizeChangedEventArgs>(UpdateWindowSizeCommandExecute);
-            DolbyFormatEnabled = true;
-            ListViewOpacity = 0;
+            _videoChangedCommand = new DelegateCommand<string>(VideoChangedCommandExecute);            
+            ListViewOpacity = 1;
         }
 
         public override void LoadState(LoadStateEventArgs e)
         {
             base.LoadState(e);
-            GetMoviesInfo();
+            GetVideosInfo();
         }
 
-        private async void GetMoviesInfo()
+        private async void GetVideosInfo()
         {
-            List<Movie> moviesList = await _dataProvider.GetDolbyMoviesInfo();
-            if (moviesList.Count > 0)
+            List<Video> providedVideoList = await _dataProvider.GetDolbyMoviesInfo();
+            if (providedVideoList.Count > 0)
             {
-                MoviesList = new ObservableCollection<Movie>(moviesList);
-                SetAudioFormat();
-                SelectedMovie = MoviesList[0];
-                MarkSelectedMovie(0);
+                VideosList = new ObservableCollection<Video>(providedVideoList);                               
+                SelectedVideo = VideosList[0];
+                MarkSelectedVideo(0);
             }
         }
 
-        private void MarkSelectedMovie(int index)
+        private void MarkSelectedVideo(int index)
         {
-            for (int i = 0; i < MoviesList.Count; i++)
+            for (int i = 0; i < VideosList.Count; i++)
             {
-                MoviesList[i].IsSelected = false;
+                VideosList[i].IsSelected = false;
             }
 
-            MoviesList[index].IsSelected = true;
-
-            if (!SelectedMovie.HasBothVideoSources)
-            {
-                DolbyFormatEnabled = !string.IsNullOrEmpty(SelectedMovie.DolbyVideoSource);
-                SetAudioFormat();
-            }
+            VideosList[index].IsSelected = true;            
         }
-
-        private void SetAudioFormat()
-        {
-            if (MoviesList != null)
-            {
-                _savedPosition = Position;
-                for (int i = 0; i < MoviesList.Count; i++)
-                {
-                    MoviesList[i].SwitchVideoSource(DolbyFormatEnabled);
-                }
-            }
-        }
-
+       
         private void UpdateProgressPercentage()
         {
             ProgressPercentage = (int)((Position.TotalMilliseconds / Duration.TotalMilliseconds) * 100);
@@ -84,8 +61,10 @@
         private void SetMediaElementSource()
         {
             Position = TimeSpan.Zero;
-            if (MediaElement != null)
-                MediaElement.Source = new Uri(SelectedMovie.VideoSource);
+            if (MediaElement != null && SelectedVideo != null)
+            {
+                MediaElement.Source = new Uri(SelectedVideo.VideoSource);
+            }                
         }
 
         #region Properties
@@ -110,41 +89,26 @@
                 return _listViewOpacity;
             }
             set
-            {
-                _listViewOpacity = value;
+            {                
+                SetProperty(ref _listViewOpacity, value);
             }
         }
-
-        private bool _dolbyFormatEnabled;
-        public bool DolbyFormatEnabled
+        
+        private ObservableCollection<Video> _videosList;
+        public ObservableCollection<Video> VideosList
         {
             get
             {
-                return _dolbyFormatEnabled;
+                return _videosList;
             }
             set
             {
-                SetProperty(ref _dolbyFormatEnabled, value);
-                SetAudioFormat();
-                SetMediaElementSource();
+                SetProperty(ref _videosList, value);
             }
         }
 
-        private ObservableCollection<Movie> _moviesList;
-        public ObservableCollection<Movie> MoviesList
-        {
-            get
-            {
-                return _moviesList;
-            }
-            set
-            {
-                SetProperty(ref _moviesList, value);
-            }
-        }
-
-        private Movie _selectedMovie;
-        public Movie SelectedMovie
+        private Video _selectedMovie;
+        public Video SelectedVideo
         {
             get
             {
@@ -195,45 +159,27 @@
             {
                 SetProperty(ref _progressPercentage, value);
             }
-        }
-
-        private double _windowWidth;
-        public double WindowWidth
-        {
-            get
-            {
-                return _windowWidth;
-            }
-            set
-            {
-                SetProperty(ref _windowWidth, value);
-            }
-        }
+        }        
         #endregion
 
         #region Commands
-        private DelegateCommand<int> _movieChangedCommand;
-        public DelegateCommand<int> MovieChangedCommand
+        private DelegateCommand<string> _videoChangedCommand;
+        public DelegateCommand<string> VideoChangedCommand
         {
-            get { return _movieChangedCommand; }
+            get { return _videoChangedCommand; }
         }
 
-        private void MovieChangedCommandExecute(int index)
-        {
-            if (ListViewOpacity > 0.8 && !MoviesList[index].IsSelected)
+        private void VideoChangedCommandExecute(string strIndex)
+        {            
+            int index = Int32.TryParse(strIndex, out index) ? index : 0;
+            if (ListViewOpacity > 0.8 && !VideosList[index].IsSelected)
             {
-                SelectedMovie = MoviesList[index];
-                MarkSelectedMovie(index);
+                SelectedVideo = VideosList[index];
+                MarkSelectedVideo(index);
             }
-        }
+        }       
 
-        private DelegateCommand<MediaElement> _movieStartedCommand;
-        public DelegateCommand<MediaElement> MovieStartedCommand
-        {
-            get { return _movieStartedCommand; }
-        }
-
-        private void MovieStartedCommandExecute(MediaElement mediaplayer)
+        public void VideoStarted(MediaElement mediaplayer)
         {
             Duration = mediaplayer.NaturalDuration.TimeSpan;
             if (_savedPosition != null)
@@ -241,34 +187,13 @@
                 Position = (TimeSpan)_savedPosition;
                 _savedPosition = null;
             }
-        }
+        }        
 
-        private DelegateCommand _movieEndedCommand;
-        public DelegateCommand MovieEndedCommand
+        public void VideoEnded()
         {
-            get { return _movieEndedCommand; }
-        }
-
-        private void MovieEndedCommandExecute()
-        {
-            int index = (SelectedMovie.Index + 1) % MoviesList.Count;
-            SelectedMovie = MoviesList[index];
-            MarkSelectedMovie(index);
-        }
-
-
-        private DelegateCommand<SizeChangedEventArgs> _updateWindowSizeCommand;
-        public DelegateCommand<SizeChangedEventArgs> UpdateWindowSizeCommand
-        {
-            get { return _updateWindowSizeCommand; }
-        }
-
-        private void UpdateWindowSizeCommandExecute(SizeChangedEventArgs args)
-        {
-            if (args != null && !args.NewSize.IsEmpty)
-            {
-                WindowWidth = args.NewSize.Width;
-            }
+            int index = (SelectedVideo.Index + 1) % VideosList.Count;
+            SelectedVideo = VideosList[index];
+            MarkSelectedVideo(index);
         }
         #endregion
     }

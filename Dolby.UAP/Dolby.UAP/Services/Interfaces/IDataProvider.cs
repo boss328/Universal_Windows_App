@@ -6,6 +6,6 @@
 
     public interface IDataProvider
     {
-        Task<List<Movie>> GetDolbyMoviesInfo();
+        Task<List<Video>> GetDolbyMoviesInfo();
     }
 }

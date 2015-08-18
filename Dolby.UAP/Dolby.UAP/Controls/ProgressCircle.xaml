@@ -42,8 +42,7 @@
             EndAngle="0"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="0" FontFamily="Segoe UI Light" FontSize="42" Name="lblValue" Visibility="Collapsed"/>
-            <!--<TextBlock Text="%" FontFamily="Segoe UI Light" FontSize="42" Name="lblPercent" />-->
+            <TextBlock Text="0" FontFamily="Segoe UI Light" FontSize="42" Name="lblValue" Visibility="Collapsed"/>            
         </StackPanel>
     </Grid>
 </UserControl>

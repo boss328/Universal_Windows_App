@@ -1,0 +1,1 @@
+MainPackage=C:\TFS\LFB\Migration_v3\Dolby.UAP\Dolby.UAP\bin\x86\Debug\Dolby.UAP_1.0.1.0_x86_Debug.appx

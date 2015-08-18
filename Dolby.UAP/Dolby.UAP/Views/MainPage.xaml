@@ -6,8 +6,7 @@
     xmlns:local="using:Dolby.UAP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:base="using:Dolby.UAP.Base"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:base="using:Dolby.UAP.Base"    
     mc:Ignorable="d">
 
     <base:BasePage.DataContext>
@@ -42,10 +41,7 @@
                     </Grid>
                 </ToggleButton.Content>
             </ToggleButton>
-            <Image Grid.Column="1" VerticalAlignment="Center" Source="ms-appx:///Assets/Content/logoDolby.png" Margin="15,15,0,15" HorizontalAlignment="Left"/>
-            <!--<StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <ToggleSwitch OnContent="Dolby Digital Plus" OffContent="Off" Margin="0,0,0,0" IsEnabled="{Binding Source={StaticResource Locator}, Path=PlaybackViewModel.SelectedMovie.HasBothVideoSources}" Style="{StaticResource ToggleSwitchStyle}" IsOn="{Binding Source={StaticResource Locator}, Path=PlaybackViewModel.DolbyFormatEnabled, Mode=TwoWay}"/>
-            </StackPanel>-->
+            <Image Grid.Column="1" VerticalAlignment="Center" Source="ms-appx:///Assets/Content/logoDolby.png" Margin="15,15,0,15" HorizontalAlignment="Left"/>            
             <Image Grid.Column="3" Source="ms-appx:///Assets/Content/logoPlain.png" Stretch="None" NineGrid="0" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right"></Image>
         </Grid>
 

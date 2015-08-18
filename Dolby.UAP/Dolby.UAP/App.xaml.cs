@@ -1,6 +1,5 @@
 ﻿namespace Dolby.UAP
 {
-    using Dolby.UAP.Views;
     using System;
     using Windows.ApplicationModel;
     using Windows.ApplicationModel.Activation;
@@ -9,6 +8,7 @@
     using Windows.UI.Xaml.Navigation;
     using Windows.UI.ViewManagement;
     using Windows.UI;
+    using Dolby.UAP.Views;
 
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

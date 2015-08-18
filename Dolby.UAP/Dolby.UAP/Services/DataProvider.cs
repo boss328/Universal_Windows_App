@@ -20,9 +20,9 @@
             _configService = configService;
         }
 
-        public async Task<List<Movie>> GetDolbyMoviesInfo()
+        public async Task<List<Video>> GetDolbyMoviesInfo()
         {
-            List<Movie> moviesList = new List<Movie>();
+            List<Video> videosList = new List<Video>();
             string jsonData = "";
 
             switch (_configService.DataSource())
@@ -40,17 +40,17 @@
 
             try
             {
-                moviesList = JsonConvert.DeserializeObject<List<Movie>>(jsonData);
-                for (int i = 0; i < moviesList.Count; i++)
+                videosList = JsonConvert.DeserializeObject<List<Video>>(jsonData);
+                for (int i = 0; i < videosList.Count; i++)
                 {
-                    moviesList[i].Index = i;
+                    videosList[i].Index = i;
                 }
             }
             catch (Exception)
             {
                 // Handle parsing errors
             }
-            return moviesList;
+            return videosList;
         }
 
         private async Task<string> JsonTextFromFile(string fileName)
