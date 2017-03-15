@@ -1,27 +1,26 @@
 ﻿[
     {
-        "Title": "Dolby Atmos – AVC (H.264)",
-        "Description": "Living room sample with Dolby Atmos & H.264 encoded video",
-        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot1.png",
-        "VideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyAtmos.mp4"
+        "Title": "Leaf",
+        "Description": "Listen as a leaf falls to earth through the jungle -- A Dolby Atmos experience.",
+        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/leaf.png",
+        "VideoSource": "ms-appx:///Assets/Content/Videos/Leaf_1920x1080p_3Mb.mp4"
     },
     {
-        "Title": "Dolby Digital Plus 5.1 – AVC (H.264)",
-        "Description": "Living room sample with Dolby Digital Plus 5.1  & H.264 encoded video",
-        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot2.png",
-        "VideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyDigitalPlus_51.mp4"
+        "Title": "Nature's Fury",
+        "Description": "A Dolby Atmos showcase experience.",
+        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/natures-fury.png",
+        "VideoSource": "ms-appx:///Assets/Content/Videos/natures-fury-3mbps.mp4"
     },
     {
-        "Title": "Dolby Digital Plus 7.1 – AVC (H.264)",
-        "Description": "Living room sample with Dolby Digital Plus 7.1 & H.264 encoded video",
-        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot3.png",
-        "VideoSource": "ms-appx:///Assets/Content/Videos/H264_DolbyDigitalPlus_71.mp4"
+        "Title": "Les Saisons",
+        "Description": "A nature-oriented audio showcase in Dolby Atmos.",
+        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/les-saisons.png",
+        "VideoSource": "ms-appx:///Assets/Content/Videos/Les_Saisons.mp4"
     },
-
     {
-        "Title": "Dolby Digital Plus 5.1 – HEVC (H.265)",
-        "Description": "Living room sample with Dolby Digital Plus 5.1 & H.265 encoded video",
-        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/Screenshot4.png",
-        "VideoSource": "ms-appx:///Assets/Content/Videos/H265_DolbyDigitalPlus_51.mp4"
+        "Title": "Shattered",
+        "Description": "A humorous audio showcase presented in Dolby Atmos.",
+        "ThumbnailFileAddress": "ms-appx:///Assets/Content/Thumbnails/shattered.png",
+        "VideoSource": "ms-appx:///Assets/Content/Videos/Shattered_1920x1080p_3Mb.mp4"
     }
 ]

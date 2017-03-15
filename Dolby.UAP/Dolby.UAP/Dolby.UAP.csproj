@@ -11,8 +11,8 @@
     <AssemblyName>Dolby.UAP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -166,14 +166,14 @@
   <ItemGroup>
     <Content Include="Assets\Content\logoDolby.png" />
     <Content Include="Assets\Content\logoPlain.png" />
-    <Content Include="Assets\Content\Thumbnails\Screenshot1.png" />
-    <Content Include="Assets\Content\Thumbnails\Screenshot2.png" />
-    <Content Include="Assets\Content\Thumbnails\Screenshot3.png" />
-    <Content Include="Assets\Content\Thumbnails\Screenshot4.png" />
-    <Content Include="Assets\Content\Videos\H264_DolbyAtmos.mp4" />
-    <Content Include="Assets\Content\Videos\H264_DolbyDigitalPlus_51.mp4" />
-    <Content Include="Assets\Content\Videos\H264_DolbyDigitalPlus_71.mp4" />
-    <Content Include="Assets\Content\Videos\H265_DolbyDigitalPlus_51.mp4" />
+    <Content Include="Assets\Content\Thumbnails\leaf.png" />
+    <Content Include="Assets\Content\Thumbnails\les-saisons.png" />
+    <Content Include="Assets\Content\Thumbnails\shattered.png" />
+    <Content Include="Assets\Content\Thumbnails\natures-fury.png" />
+    <Content Include="Assets\Content\Videos\Leaf_1920x1080p_3Mb.mp4" />
+    <Content Include="Assets\Content\Videos\Les_Saisons.mp4" />
+    <Content Include="Assets\Content\Videos\Shattered_1920x1080p_3Mb.mp4" />
+    <Content Include="Assets\Content\Videos\natures-fury-3mbps.mp4" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
